@@ -14,6 +14,8 @@ namespace AsteroidGame
         private static BufferedGraphicsContext __Context;
         private static BufferedGraphics __Buffer;
 
+        private static VisualObject[] __GameObjects;
+
         public static int Width { get; set; }
 
         public static int Height { get; set; }
@@ -36,7 +38,29 @@ namespace AsteroidGame
             g.DrawRectangle(Pens.White, new Rectangle(400, 300, 100, 100));
             g.FillEllipse(Brushes.Red, new Rectangle(400, 300, 100, 100));
 
+            foreach (var game_object in __GameObjects)
+                game_object.Draw(g);
+
             __Buffer.Render();
+        }
+
+        public static void Update()
+        {
+            foreach (var game_object in __GameObjects)
+                game_object.Update();
+        }
+
+        public static void Load()
+        {
+            __GameObjects = new VisualObject[30]; //Игровой обьект
+
+            for(var i =0; i < __GameObjects.Length; i++)
+            {
+                __GameObjects[i] = new VisualObject(
+                    new Point(600, i * 20),  //Место оложения
+                    new Point(15 - i, 20 - i),  //Скорость еремещения
+                    new Size(20, 20));  //Размер
+            }
         }
     }
 }
