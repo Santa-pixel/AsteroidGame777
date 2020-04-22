@@ -8,15 +8,19 @@ namespace AsteroidGame
 {
     static class Program
     {
-        /// <summary>
-        /// Главная точка входа для приложения.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+
+            Form game_form = new Form();
+            game_form.Width = 800;
+            game_form.Height = 600;
+            game_form.Show();
+
+            Application.Run(game_form);
         }
     }
 }
